@@ -16,6 +16,7 @@ exports.get = async function (req, res) {
       { alias: 'name', original: 'adm_section.name' },
       { alias: 'description', original: 'adm_section.description' },
       { alias: 'status_name', original: 'sys_status_information.name' },
+      { alias: 'department_id', original: 'adm_department.id' },
       { alias: 'department_name', original: 'adm_department.name' },
     ];
     let genQuery = new QueryBuilderV2(queryAdmSection(), body);

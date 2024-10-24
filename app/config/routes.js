@@ -26,9 +26,13 @@ module.exports = function (app) {
     router.post('/user', user.update);
     router.delete('/user', user.delete);
   });
+
   app.group('/api/v1/config', (router) => {
     var access_menu = require('../controller/Config/access_menu');
     router.get('/access-menu', access_menu.get);
     router.post('/access-menu', access_menu.update);
+    var application = require('../controller/Config/application');
+    router.get('/application', application.get);
+    router.post('/application', application.update);
   });
 };
