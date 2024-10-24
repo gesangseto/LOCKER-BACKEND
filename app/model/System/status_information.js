@@ -8,7 +8,11 @@ const SysStatusInformation = Sequel.define(
     created_by: { type: DataTypes.BIGINT },
     updated_by: { type: DataTypes.BIGINT },
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-    code: { type: DataTypes.CITEXT, allowNull: false },
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      collate: 'utf8mb4_general_ci',
+    },
     uri: { type: DataTypes.STRING },
     name: { type: DataTypes.STRING },
     description: { type: DataTypes.STRING },

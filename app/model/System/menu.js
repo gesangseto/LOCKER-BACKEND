@@ -20,7 +20,7 @@ const SysMenu = Sequel.define(
     can_delete: { type: DataTypes.BOOLEAN, defaultValue: true },
     can_print: { type: DataTypes.BOOLEAN, defaultValue: true },
     can_workflow: { type: DataTypes.BOOLEAN, defaultValue: false },
-    status: { type: DataTypes.INTEGER, allowNull: false },
+    status: { type: DataTypes.BIGINT, allowNull: false },
   },
   {
     freezeTableName: true,

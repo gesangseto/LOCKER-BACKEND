@@ -1,7 +1,6 @@
 'use strict';
 const { Sequel } = require('../../config/connection');
 const response = require('../../config/response');
-const QueryBuilder = require('../../helper/query_builder');
 const {
   queryAccessMenu,
   ConfAccessMenu,

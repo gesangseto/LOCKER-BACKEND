@@ -6,9 +6,6 @@ const moment = require('moment');
 
 module.exports = class QueryBuilderV2 {
   constructor(query, data = {}, options = {}) {
-    this.check_workflow = isBoolean(options.check_workflow)
-      ? options.check_workflow
-      : false;
     this.data = data;
     this.mainQuery = query;
     this.query = query;
@@ -26,7 +23,10 @@ module.exports = class QueryBuilderV2 {
         start = parseInt((data.page - 1) * data.limit);
       }
       var end = parseInt(data.limit);
-      this.limitOffset = ` OFFSET ${start} ROWS FETCH NEXT ${end} ROWS ONLY `;
+      // Untuk POSTGRES
+      // this.limitOffset = ` OFFSET ${start} ROWS FETCH NEXT ${end} ROWS ONLY `;
+      // Untuk MYSQL
+      this.limitOffset = ` LIMIT ${data.limit} OFFSET ${start} `;
     }
 
     const splitAliasAndQuery = () => {
@@ -64,13 +64,7 @@ module.exports = class QueryBuilderV2 {
 
   async getData() {
     let _data = await Sequel.query(this.getAllQuery());
-    if (this.check_workflow) {
-      let newData = [];
-      for (const it of _data[0]) {
-        newData.push(it);
-      }
-      _data[0] = newData;
-    }
+
     return _data[0];
   }
   async getDataAndCountAll() {
@@ -149,6 +143,7 @@ module.exports = class QueryBuilderV2 {
       }
       let field_query = '';
       // console.log(key, filter[key], '=============');
+      // Gunakan ILIKE Untuk Postgres, LIKE untuk msql
       for (const it of searchData) {
         if (it.value || isBoolean(it.value)) {
           if (field_query) field_query += ` ${operator} `;
@@ -158,13 +153,13 @@ module.exports = class QueryBuilderV2 {
           }
           // Dibawah ini adalah pencarian bertipe STRING
           else if (it.matchMode === 'startsWith') {
-            field_query += ` ${_key} ILIKE '${it.value}%'`;
+            field_query += ` ${_key} LIKE '${it.value}%'`;
           } else if (it.matchMode === 'endsWith') {
-            field_query += ` ${_key} ILIKE '%${it.value}'`;
+            field_query += ` ${_key} LIKE '%${it.value}'`;
           } else if (it.matchMode === 'contains') {
-            field_query += ` ${_key} ILIKE '%${it.value}%'`;
+            field_query += ` ${_key} LIKE '%${it.value}%'`;
           } else if (it.matchMode === 'notContains') {
-            field_query += ` ${_key} NOT ILIKE '%${it.value}%'`;
+            field_query += ` ${_key} NOT LIKE '%${it.value}%'`;
           }
           // Dibawah ini adalah pencarian bertipe INTEGER/FLOAT
           else if (it.matchMode === 'equals') {
@@ -214,11 +209,13 @@ module.exports = class QueryBuilderV2 {
         it.endsWith('_id') ||
         it.endsWith('_date')
       ) {
-        _searchQuery += ` ${it}::TEXT LIKE '%${srch}%' OR`;
+        // _searchQuery += ` ${it}::TEXT LIKE '%${srch}%' OR`;
+        _searchQuery += ` ${it} LIKE '%${srch}%' OR`;
       }
       // Pencarian bertipe STRING (CASE NOT SENSITIVE)
       else {
-        _searchQuery += ` ${it} ILIKE '%${srch}%' OR`;
+        // _searchQuery += ` ${it} ILIKE '%${srch}%' OR`;
+        _searchQuery += ` ${it} LIKE '%${srch}%' OR`;
       }
     }
     if (_searchQuery) {

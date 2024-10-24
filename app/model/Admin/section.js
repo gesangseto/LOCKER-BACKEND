@@ -32,8 +32,6 @@ const AdmSection = Sequel.define(
 AdmSection.sync({ alter: true })
   .then(() => {})
   .catch((error) => {
-    console.log(error);
-
     console.error(`${tableName} kesalahan saat melakukan sync`);
   });
 

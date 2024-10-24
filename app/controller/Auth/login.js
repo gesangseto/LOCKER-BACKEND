@@ -2,7 +2,7 @@
 
 const { Sequel } = require('../../config/connection');
 const { encryptData, makeId, makeIdDate } = require('../../helper/utils');
-const { AdmUser, queryAdmUser } = require('../../model/Admin/user');
+const { queryAdmUser } = require('../../model/Admin/user');
 const { ConfApplication } = require('../../model/Config/application');
 const response = require('../../config/response');
 const { SysAuthentication } = require('../../model/Auth/authentication');

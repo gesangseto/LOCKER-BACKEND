@@ -24,7 +24,7 @@ const ConfApplication = Sequel.define(
 );
 
 ConfApplication.sync({ alter: true })
-  .then(() => {})
+  .then(() => { })
   .catch((error) => {
     console.log(error);
     console.error(`${tableName} kesalahan saat melakukan sync`);

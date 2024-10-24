@@ -1,7 +1,6 @@
 'use strict';
 const { Sequel } = require('../../config/connection');
 const response = require('../../config/response');
-const QueryBuilder = require('../../helper/query_builder');
 const QueryBuilderV2 = require('../../helper/query_builder_v2');
 const { humanizeText } = require('../../helper/utils');
 const {
@@ -25,7 +24,6 @@ exports.get = async function (req, res) {
     genQuery.search(searchingParameter);
     genQuery.ultimateSearch(searchingParameter);
     genQuery.ordering('adm_department.id');
-    // genQuery
     let getData = await genQuery.getDataAndCountAll();
     data.rows = getData.rows;
     data.count = getData.count;

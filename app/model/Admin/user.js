@@ -36,7 +36,6 @@ const AdmUser = Sequel.define(
 AdmUser.sync({ alter: true })
   .then(() => {})
   .catch((error) => {
-    console.log(error);
     console.error(`${tableName} kesalahan saat melakukan sync`);
   });
 

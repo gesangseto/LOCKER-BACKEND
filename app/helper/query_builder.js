@@ -5,9 +5,6 @@ const { isBoolean } = require('./utils');
 
 module.exports = class QueryBuilder {
   constructor(query, data = {}, options = {}) {
-    this.check_workflow = isBoolean(options.check_workflow)
-      ? options.check_workflow
-      : false;
     this.data = data;
     this.mainQuery = query;
     this.query = query;
@@ -63,13 +60,6 @@ module.exports = class QueryBuilder {
 
   async getData() {
     let _data = await Sequel.query(this.getAllQuery());
-    if (this.check_workflow) {
-      let newData = [];
-      for (const it of _data[0]) {
-        newData.push(it);
-      }
-      _data[0] = newData;
-    }
     return _data[0];
   }
   async getDataAndCountAll() {
