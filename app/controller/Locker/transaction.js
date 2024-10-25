@@ -2,9 +2,7 @@
 const { Sequel } = require('../../config/connection');
 const response = require('../../config/response');
 const QueryBuilderV2 = require('../../helper/query_builder_v2');
-const { humanizeText } = require('../../helper/utils');
-const { queryLkrCustomer, LkrCustomer } = require('../../model/Locker/locker_customer');
-const { queryLkrTransaction } = require('../../model/Locker/locker_transaction');
+const { queryLkrTransaction, LkrTransaction } = require('../../model/Locker/locker_transaction');
 
 exports.get = async function (req, res) {
   let body = req.query;
@@ -36,7 +34,7 @@ exports.insert = async function (req, res) {
   var _exec = await Sequel.transaction();
   try {
     let body = req.body;
-    let _res = await LkrCustomer.create(body, { transaction: _exec });
+    let _res = await LkrTransaction.create(body, { transaction: _exec });
     await _exec.commit();
     return response.response(_res, res);
   } catch (error) {

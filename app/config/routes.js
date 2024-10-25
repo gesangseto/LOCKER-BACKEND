@@ -47,5 +47,9 @@ module.exports = function (app) {
     var transaction = require('../controller/Locker/transaction');
     router.get('/transaction', transaction.get);
     router.put('/transaction', transaction.insert);
+    var access_report = require('../controller/Locker/access_report');
+    router.get('/access-report/attribute', access_report.getAttributeReport);
+    router.get('/access-report', access_report.get);
+    router.post('/access-report', access_report.update);
   });
 };

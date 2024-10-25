@@ -35,7 +35,7 @@ const ConfAccessMenu = Sequel.define(
 );
 
 ConfAccessMenu.sync({ alter: true })
-  .then(() => {})
+  .then(() => { })
   .catch((error) => {
     console.error(`${tableName} kesalahan saat melakukan sync`);
   });
