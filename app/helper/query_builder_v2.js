@@ -231,7 +231,8 @@ module.exports = class QueryBuilderV2 {
     delete _data.page;
     delete _data.limit;
     delete _data.search_options;
-    _data.status = _data.status || _data.StatusCode;
+    if (_data.status || _data.StatusCode)
+      _data.status = _data.status || _data.StatusCode
     let _query = '';
 
     for (const col in _data) {
@@ -243,6 +244,7 @@ module.exports = class QueryBuilderV2 {
         }
         // Pencarian jika data bertipe non array, e.g. status=9&id=10
         else {
+
           _data[col] = _data[col].toString();
           // Jika data yang dikirim null maka cari kedatabase berdasarkan NULL
           if (_data[col].toLowerCase() === 'null') {

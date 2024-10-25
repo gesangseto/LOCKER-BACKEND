@@ -35,4 +35,17 @@ module.exports = function (app) {
     router.get('/application', application.get);
     router.post('/application', application.update);
   });
+  app.group('/api/v1/locker', (router) => {
+    var customer = require('../controller/Locker/customer');
+    router.get('/customer', customer.get);
+    router.put('/customer', customer.insert);
+    router.post('/customer', customer.update);
+    var api_message = require('../controller/Locker/api_message');
+    router.get('/api-message', api_message.get);
+    router.put('/api-message', api_message.insert);
+    router.post('/api-message', api_message.update);
+    var transaction = require('../controller/Locker/transaction');
+    router.get('/transaction', transaction.get);
+    router.put('/transaction', transaction.insert);
+  });
 };
