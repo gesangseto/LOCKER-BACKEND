@@ -72,12 +72,13 @@ exports.update = async function (req, res) {
   try {
     let body = req.body;
 
-    if (!body.section_id) throw new Error(`Section ID is required.`);
+    if (body.section_id) {
+      let _section = await AdmSection.findOne({
+        where: { id: body.section_id, status: 1 },
+      });
+      if (!_section) throw new Error(`Section is not found.`);
+    }
 
-    let _section = await AdmSection.findOne({
-      where: { id: body.section_id, status: 1 },
-    });
-    if (!_section) throw new Error(`Section is not found.`);
 
     if (body.password) body.password = encryptData(body.password);
     else delete body.password;
