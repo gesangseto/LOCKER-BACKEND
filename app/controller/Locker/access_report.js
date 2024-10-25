@@ -10,6 +10,12 @@ exports.get = async function (req, res) {
   let body = req.query;
   var data = { rows: [body], count: 0 };
   try {
+    let isSuper = false
+    if (!req.headers.user_id && body.id == 'sa') {
+      delete body.id;
+      isSuper = true
+    }
+
     let searchingParameter = [
       { alias: 'id', original: 'adm_section.id' },
       { alias: 'name', original: 'adm_section.name' },
@@ -32,6 +38,9 @@ exports.get = async function (req, res) {
         let data = await LkrAccessReport.findOne({ where: { section_id: body.id } })
         if (data)
           it.access_column = data.access_column
+      } else if (isSuper) {
+        //ini super admin
+        it.access_column = Object.keys(LkrTransaction.rawAttributes);
       }
       it.section_id = it.id;
       it.section_code = it.code;
