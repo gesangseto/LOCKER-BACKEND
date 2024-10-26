@@ -1,5 +1,6 @@
 'use strict';
 const { removeFirstSpace } = require('../helper/utils');
+const moment = require('moment');
 
 exports.response = function (data = null, res, useLog = true) {
   let msg = null;
@@ -37,4 +38,36 @@ exports.response = function (data = null, res, useLog = true) {
   // End Create Log On Response
   res.json(_res);
   res.end();
+};
+
+
+exports.responseFile = function ({ content, fileName }, res) {
+  let directory = appRoot + '/temp_file';
+  const extExcel = ['xls', 'xlsx'];
+  const extPdf = ['pdf'];
+  const extZip = ['zip'];
+  var re = /(?:\.([^.]+))?$/;
+  var ext = re.exec(fileName)[1];
+  var name = fileName.replace(/\.[^/.]+$/, '');
+  let dateFormat = moment().format('YYYY-MM-DD HHmmss');
+  name = `${name}_${dateFormat}.${ext}`;
+  if (!ext) {
+    return null;
+  }
+  if (extExcel.includes(ext)) {
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    return res.sendFile(`${directory}/${fileName}`);
+  } else if (extPdf.includes(ext) && content) {
+    res.setHeader('Content-Type', 'application/pdf');
+    return res.send(content);
+  } else if (extPdf.includes(ext)) {
+    res.setHeader('Content-Type', 'application/pdf');
+    return res.sendFile(`${directory}/${fileName}`);
+  } else if (extZip.includes(ext)) {
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+    return res.sendFile(`${directory}/${fileName}`);
+  }
+  throw new Error('Error Send File');
 };

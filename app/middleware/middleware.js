@@ -12,7 +12,12 @@ dotenv.config(); //- MYSQL Module
 async function check_token(req, res) {
   var data = { data: req.body, error: null, message: null };
   try {
-    let allowingUrl = ['/api/v1/auth/login', '/api/v1/sync-table', '/api/v1/config/application'];
+    let allowingUrl = [
+      '/api/v1/auth/login',
+      '/api/v1/sync-table',
+      '/api/v1/config/application',
+      '/api/v1/locker/transaction'
+    ];
     for (const url of allowingUrl) {
       if (req.originalUrl.includes(url)) {
         return true;

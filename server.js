@@ -5,6 +5,7 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const { sqlInjectionPrevention } = require('./app/helper/utils');
 require('express-group-routes');
+const fs = require('fs');
 
 global.appRoot = path.resolve(__dirname);
 global.memCache = {};
@@ -57,7 +58,12 @@ app.use(async function (req, res, next) {
   next();
 });
 // END MIDDLEWARE OAUTH
+const createTempFolder = () => {
+  let _dir = appRoot + '/temp_file';
+  if (!fs.existsSync(_dir)) fs.mkdirSync(_dir, { recursive: true });
+};
 
+createTempFolder();
 var routes = require('./app/config/routes');
 routes(app);
 

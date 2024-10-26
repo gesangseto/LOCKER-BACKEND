@@ -2,7 +2,25 @@
 const { Sequel } = require('../../config/connection');
 const response = require('../../config/response');
 const QueryBuilderV2 = require('../../helper/query_builder_v2');
+const { ExportDataToXLS } = require('../../lib/export-data');
 const { queryLkrTransaction, LkrTransaction } = require('../../model/Locker/locker_transaction');
+
+
+const exportFile = ({ items, res, body }) => {
+  let fields = JSON.parse(body.fieldTable)
+  let headerField = {}
+  for (const it of fields) {
+    headerField[it.label] = it.key
+  }
+  let MakeFile = new ExportDataToXLS({
+    headerTrx: headerField,
+    items: items,
+    title: `Transaction Report`,
+    res: res,
+  });
+  return MakeFile.generate();
+};
+
 
 exports.get = async function (req, res) {
   let body = req.query;
@@ -18,6 +36,9 @@ exports.get = async function (req, res) {
     genQuery.search(searchingParameter);
     genQuery.ultimateSearch(searchingParameter);
     genQuery.ordering('locker_transaction.id');
+    if (body.export && body.export_type) {
+      return exportFile({ items: await genQuery.getData(), res: res, body: body })
+    }
     let getData = await genQuery.getDataAndCountAll();
     data.rows = getData.rows;
     data.count = getData.count;
