@@ -16,7 +16,9 @@ async function check_token(req, res) {
       '/api/v1/auth/login',
       '/api/v1/sync-table',
       '/api/v1/config/application',
-      '/api/v1/locker/transaction'
+      '/api/v1/locker/transaction',
+      '/api/v1/locker/customer',
+      '/api/v1/locker/api-message'
     ];
     for (const url of allowingUrl) {
       if (req.originalUrl.includes(url)) {

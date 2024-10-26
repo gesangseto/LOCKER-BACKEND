@@ -27,6 +27,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "mysql2": "^3.11.3",
+    "nexe": "^4.0.0-rc.2",
     "path": "^0.12.7",
     "sequelize": "^6.23.2"
   }

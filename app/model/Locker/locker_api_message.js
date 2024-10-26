@@ -10,7 +10,7 @@ const LkrApiMessage = Sequel.define(
     updated_by: { type: DataTypes.BIGINT },
 
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-    type: { type: DataTypes.STRING, allowNull: false },
+    unique_id: { type: DataTypes.STRING, allowNull: false },
     message: { type: DataTypes.TEXT, allowNull: false },
     sync: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
   },

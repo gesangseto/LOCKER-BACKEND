@@ -11,7 +11,7 @@ exports.get = async function (req, res) {
   try {
     let searchingParameter = [
       { alias: 'id', original: 'locker_api_message.id' },
-      { alias: 'type', original: 'locker_api_message.type' },
+      { alias: 'unique_id', original: 'locker_api_message.unique_id' },
       { alias: 'sync', original: 'locker_customer.sync' },
     ];
     let genQuery = new QueryBuilderV2(queryLkrApiMessage(), body);
@@ -59,7 +59,7 @@ exports.update = async function (req, res) {
       }
     }
 
-    delete body.type
+    delete body.unique_id
     delete body.message
 
     let _res = await LkrApiMessage.update(body, {
