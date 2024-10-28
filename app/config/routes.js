@@ -40,6 +40,14 @@ module.exports = function (app) {
     router.get('/customer', customer.get);
     router.put('/customer', customer.insert);
     router.post('/customer', customer.update);
+    var user = require('../controller/Locker/user');
+    router.get('/user', user.get);
+    router.put('/user', user.insert);
+    router.post('/user', user.update);
+    router.delete('/user', user.delete);
+    var hostname = require('../controller/Locker/hostname');
+    router.get('/hostname', hostname.get);
+    router.post('/hostname', hostname.update);
     var api_message = require('../controller/Locker/api_message');
     router.get('/api-message', api_message.get);
     router.put('/api-message', api_message.insert);
