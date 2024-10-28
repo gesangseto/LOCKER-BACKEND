@@ -48,6 +48,11 @@ module.exports = function (app) {
     var hostname = require('../controller/Locker/hostname');
     router.get('/hostname', hostname.get);
     router.post('/hostname', hostname.update);
+    var size = require('../controller/Locker/size');
+    router.get('/size', size.get);
+    router.put('/size', size.insert);
+    router.post('/size', size.update);
+    router.delete('/size', size.delete);
     var api_message = require('../controller/Locker/api_message');
     router.get('/api-message', api_message.get);
     router.put('/api-message', api_message.insert);

@@ -2,40 +2,38 @@ const { DataTypes } = require('sequelize');
 const { Sequel } = require('../../config/connection');
 const { conf_table } = require('../../config/config_model');
 
-let tableName = 'locker_hostname';
-const LkrHostname = Sequel.define(
+let tableName = 'locker_size';
+const LkrSize = Sequel.define(
   tableName,
   {
     created_by: { type: DataTypes.BIGINT },
     updated_by: { type: DataTypes.BIGINT },
-
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-    locker_name: { type: DataTypes.STRING, allowNull: false },
-    locker_id: { type: DataTypes.STRING, allowNull: false },
-    locker_ip: { type: DataTypes.STRING(30), allowNull: true },
+    size: { type: DataTypes.STRING(2), allowNull: false },
+    price: { type: DataTypes.STRING, allowNull: false },
+
   },
   {
     ...conf_table(),
     indexes: [
       { fields: ['id'] },
-      { fields: ['locker_name'] },
-      { fields: ['locker_id'] },
-      { fields: ['locker_ip'] },
+      { fields: ['size'], unique: true, name: 'UQ_locker_size' },
+      { fields: ['price'] },
     ],
   }
 );
 
-LkrHostname.sync({ alter: true })
+LkrSize.sync({ alter: true })
   .then(() => { })
   .catch((error) => {
     console.error(`${tableName} kesalahan saat melakukan sync`);
   });
 
-const queryLkrHostname = () => {
+const queryLkrSize = () => {
   let _res = ` SELECT 
-  locker_hostname.*
-FROM locker_hostname
-WHERE locker_hostname.deleted_at IS NULL`;
+  locker_size.*
+FROM locker_size
+WHERE locker_size.deleted_at IS NULL`;
   return _res;
 };
-module.exports = { LkrHostname, queryLkrHostname };
+module.exports = { LkrSize, queryLkrSize };

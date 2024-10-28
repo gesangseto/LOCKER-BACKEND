@@ -9,15 +9,12 @@ const LkrUser = Sequel.define(
     created_by: { type: DataTypes.BIGINT },
     updated_by: { type: DataTypes.BIGINT },
 
-    update_at: { type: DataTypes.DATE }, //Request Jay
-
-    id: { type: DataTypes.BIGINT, primaryKey: true, allowNull: false },
+    id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     username: { type: DataTypes.STRING, allowNull: false },
     phone_number: { type: DataTypes.STRING, allowNull: false },
     pin_number: { type: DataTypes.STRING, allowNull: true },
     card_number: { type: DataTypes.TEXT, allowNull: true },
     status: { type: DataTypes.STRING, allowNull: true },
-
   },
   {
     ...conf_table(),

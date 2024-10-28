@@ -35,23 +35,23 @@ const SysMenu = Sequel.define(
   }
 );
 SysMenu.sync({ alter: true })
-  .then(() => {})
+  .then(() => { })
   .catch((error) => {
     console.log(error.sql);
     console.error(`${tableName} kesalahan saat melakukan sync`);
   });
 
-SysMenu.belongsTo(SysMenuModule, {
-  foreignKey: 'menu_module_id',
-  targetKey: 'id',
-  as: '_sys_menu_module',
-});
+// SysMenu.belongsTo(SysMenuModule, {
+//   foreignKey: 'menu_module_id',
+//   targetKey: 'id',
+//   as: '_sys_menu_module',
+// });
 
-SysMenu.belongsTo(SysStatusInformation, {
-  foreignKey: 'status',
-  targetKey: 'id',
-  as: '_status',
-});
+// SysMenu.belongsTo(SysStatusInformation, {
+//   foreignKey: 'status',
+//   targetKey: 'id',
+//   as: '_status',
+// });
 
 const querySysMenu = () => {
   let _res = ` SELECT 
