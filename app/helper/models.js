@@ -389,9 +389,8 @@ async function update_query({ data, key, table, onlyQuery = false }) {
     if (!_onApproval.is_approve) {
       let status = _onApproval.is_approve;
       _data.error = true;
-      _data.message = `Cannot edit data, Approval status is ${
-        status == false ? "Rejected" : "Pending"
-      }`;
+      _data.message = `Cannot edit data, Approval status is ${status == false ? "Rejected" : "Pending"
+        }`;
       return _data;
     }
   }

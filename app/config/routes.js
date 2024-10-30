@@ -53,6 +53,13 @@ module.exports = function (app) {
     router.put('/size', size.insert);
     router.post('/size', size.update);
     router.delete('/size', size.delete);
+    var box = require('../controller/Locker/box');
+    router.get('/box', box.get);
+    router.put('/box', box.insert);
+    router.post('/box', box.update);
+    router.delete('/box', box.delete);
+    router.get('/box-number', box.getNumber);
+    router.post('/box-number', box.updateNumber);
     var api_message = require('../controller/Locker/api_message');
     router.get('/api-message', api_message.get);
     router.put('/api-message', api_message.insert);

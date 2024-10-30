@@ -52,7 +52,7 @@ exports.update = async function (req, res) {
     try {
         let body = req.body;
         if (!body.id) throw new Error(`ID is required`);
-        let require = ['id', 'status']
+        let require = ['id']
         for (const row of require) {
             if (!body[`${row}`]) {
                 throw new Error(`${humanizeText(row)} is required.`);

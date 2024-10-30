@@ -16,6 +16,7 @@ const ConfApplication = Sequel.define(
     address: { type: DataTypes.TEXT },
     phone: { type: DataTypes.STRING },
     logo: { type: DataTypes.TEXT },
+    logo_home: { type: DataTypes.TEXT },
     session_timeout: { type: DataTypes.INTEGER },
     multiple_login: { type: DataTypes.BOOLEAN },
     date_format: { type: DataTypes.STRING },

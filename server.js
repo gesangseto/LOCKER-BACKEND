@@ -40,7 +40,7 @@ app.use(async function (req, res, next) {
     body: req.body,
   };
   console.log('======================================================');
-  console.log(`req : ${JSON.stringify(request)}`);
+  console.log(`req : ${JSON.stringify(request).substring(0, 500)}`);
   // PREVENT FROM SQL INJECTION
   if (req.method === 'GET') {
     req.query = sqlInjectionPrevention(req.query);

@@ -15,5 +15,5 @@ REPLACE INTO sys_menu (menu_module_id,id,parent_id,name,url,icon,`order`,can_cre
 	 (3,402,401,'Message','/locker/transaction/message',NULL,NULL,0,1,0,0,0,0,1),
 	 (3,403,401,'Report','/locker/transaction/report',NULL,NULL,0,1,0,0,1,0,1),
 	 (3,501,NULL,'Module',NULL,'pi pi-pw pi-desktop',NULL,0,0,0,0,0,0,1),
-	 (3,502,501,'Size','/locker/module/box',NULL,NULL,1,1,1,1,0,0,1),
+	 (3,502,501,'Size','/locker/module/size',NULL,NULL,1,1,1,1,0,0,1),
 	 (3,503,501,'Box','/locker/module/box',NULL,NULL,1,1,1,1,0,0,1);
