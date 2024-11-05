@@ -15,10 +15,10 @@ const exportFile = ({ items, res, body }) => {
   let MakeFile = new ExportDataToXLS({
     headerTrx: headerField,
     items: items,
-    title: `Transaction Report`,
+    title: `Transaction-Report`,
     res: res,
   });
-  return MakeFile.generate();
+  return MakeFile.generateCsv();
 };
 
 

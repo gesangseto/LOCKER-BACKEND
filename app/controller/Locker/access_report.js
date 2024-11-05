@@ -37,8 +37,13 @@ exports.get = async function (req, res) {
         it.access_column = []
         if (body.id) {
           let data = await LkrAccessReport.findOne({ where: { section_id: body.id } })
-          if (data)
-            it.access_column = data.access_column
+          if (data) {
+            try {
+              it.access_column = JSON.parse(data.access_column)
+            } catch (error) {
+              it.access_column = data.access_column
+            }
+          }
         }
         it.section_id = it.id;
         it.section_code = it.code;

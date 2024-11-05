@@ -189,7 +189,6 @@ module.exports = class QueryBuilderV2 {
       }
     }
     this.query += _query;
-    console.log(this.query);
   }
 
   search(allowSearch = Array) {

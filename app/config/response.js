@@ -27,7 +27,7 @@ exports.response = function (data = null, res, useLog = true) {
   // Create Log On Response
   let _res = body_res;
   if (useLog) {
-    console.log(`res : ${JSON.stringify(body_res)}`);
+    console.log(`res : is-error => ${JSON.stringify(body_res.error)}`);
   } else {
     _res = {
       currentTime: body_res.currentTime,
@@ -43,7 +43,7 @@ exports.response = function (data = null, res, useLog = true) {
 
 exports.responseFile = function ({ content, fileName }, res) {
   let directory = appRoot + '/temp_file';
-  const extExcel = ['xls', 'xlsx'];
+  const extExcel = ['xls', 'xlsx', 'csv'];
   const extPdf = ['pdf'];
   const extZip = ['zip'];
   var re = /(?:\.([^.]+))?$/;

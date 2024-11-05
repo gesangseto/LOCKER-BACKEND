@@ -37,7 +37,7 @@ app.use(async function (req, res, next) {
     client_ip: req.headers['x-forwarded-for'] || req.ip,
     method: req.method,
     path: req.originalUrl,
-    body: req.body,
+    // body: req.body,
   };
   console.log('======================================================');
   console.log(`req : ${JSON.stringify(request).substring(0, 500)}`);
