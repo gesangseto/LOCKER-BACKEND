@@ -9,7 +9,7 @@ compile({
   build: true,
   targets: 'windows',
   resources: './public',
-  ico: './public/assets/favicon.ico',
+  ico: './public/assets/locker.ico',
   verbose: true,
 }).then((err) => {
   if (err) throw err;

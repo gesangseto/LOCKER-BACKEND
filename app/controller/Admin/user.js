@@ -95,6 +95,37 @@ exports.update = async function (req, res) {
     return response.response(data, res);
   }
 };
+exports.changePassword = async function (req, res) {
+  var data = { data: req.body };
+  var _exec = await Sequel.transaction();
+  try {
+    let body = req.body;
+    body.user_id = req.headers.user_id || body.user_id
+    if (!body.user_id) {
+      throw new Error(`USER ID is Required.`);
+    }
+    if (!body.old_password || !body.password) {
+      throw new Error(`Old and New Password is Required.`);
+    }
+    let user = await AdmUser.findOne({
+      where: { id: req.headers.user_id, status: 1 },
+    });
+    if (!user) throw new Error(`User not found.`);
+    body.old_password = encryptData(body.old_password);
+    if (body.old_password !== user.password) throw new Error(`Your old password is incorrect.`);
+
+    body.password = encryptData(body.password);
+    user.password = body.password
+    await user.save({ transaction: _exec })
+    await _exec.commit();
+    return response.response(data, res);
+  } catch (error) {
+    await _exec.rollback();
+    data.error = true;
+    data.message = `${error}`;
+    return response.response(data, res);
+  }
+};
 
 exports.delete = async function (req, res) {
   var _exec = await Sequel.transaction();

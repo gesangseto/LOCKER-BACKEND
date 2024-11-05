@@ -32,19 +32,26 @@ exports.get = async function (req, res) {
     // genQuery
     let getData = await genQuery.getData();
     let newData = [];
-    for (const it of getData) {
-      it.access_column = []
-      if (body.id) {
-        let data = await LkrAccessReport.findOne({ where: { section_id: body.id } })
-        if (data)
-          it.access_column = data.access_column
-      } else if (isSuper) {
-        //ini super admin
-        it.access_column = Object.keys(LkrTransaction.rawAttributes);
+    if (!isSuper)
+      for (const it of getData) {
+        it.access_column = []
+        if (body.id) {
+          let data = await LkrAccessReport.findOne({ where: { section_id: body.id } })
+          if (data)
+            it.access_column = data.access_column
+        }
+        it.section_id = it.id;
+        it.section_code = it.code;
+        it.section_name = it.name;
+        newData.push(it);
       }
-      it.section_id = it.id;
-      it.section_code = it.code;
-      it.section_name = it.name;
+    if (isSuper) {
+      let it = {}
+      //ini super admin
+      it.access_column = Object.keys(LkrTransaction.rawAttributes);
+      it.section_id = '0';
+      it.section_code = 'sa';
+      it.section_name = 'super admin';
       newData.push(it);
     }
     data.rows = newData;

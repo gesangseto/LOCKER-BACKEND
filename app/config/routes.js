@@ -25,6 +25,7 @@ module.exports = function (app) {
     router.put('/user', user.insert);
     router.post('/user', user.update);
     router.delete('/user', user.delete);
+    router.post('/user/change-password', user.changePassword);
   });
 
   app.group('/api/v1/config', (router) => {

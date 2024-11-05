@@ -18,7 +18,7 @@ const LkrApiMessage = Sequel.define(
     ...conf_table(),
     indexes: [
       { fields: ['id'] },
-      { fields: ['type'] },
+      { fields: ['unique_id'], unique: true, name: 'UQ_locker_api_message' },
     ],
   }
 );

@@ -1,5 +1,5 @@
 Command for build to .exe:
-mkdir -p ./build && node buildScript.js && cp ./package.json ./build && cp ./.env ./build && cp ./README.md ./build
+mkdir -p ./build/app/migration && node buildScript.js && cp ./package.json ./build && cp ./.env ./build && cp ./README.md ./build && cp ./app/migration/* ./build/app/migration/
 
 Requirment App:
 1. Nodejs v 14.20.0
