@@ -28,8 +28,20 @@ exports.get = async function (req, res) {
   try {
     let searchingParameter = [
       { alias: 'id', original: 'locker_transaction.id' },
-      { alias: 'type', original: 'locker_transaction.type' },
-      { alias: 'sync', original: 'locker_transaction.sync' },
+      { alias: 'created_by', original: 'locker_transaction.created_by' },
+      { alias: 'updated_by', original: 'locker_transaction.updated_by' },
+      { alias: 'created_at', original: 'locker_transaction.created_at' },
+      { alias: 'updated_at', original: 'locker_transaction.updated_at' },
+      { alias: 'deleted_at', original: 'locker_transaction.deleted_at' },
+      { alias: 'gross_amount', original: 'locker_transaction.gross_amount' },
+      { alias: 'box_number', original: 'locker_transaction.box_number' },
+      { alias: 'locker_name', original: 'locker_transaction.locker_name' },
+      { alias: 'phone_number', original: 'locker_transaction.phone_number' },
+      { alias: 'pin_number', original: 'locker_transaction.pin_number' },
+      { alias: 'status', original: 'locker_transaction.status' },
+      { alias: 'start_at', original: 'locker_transaction.start_at' },
+      { alias: 'expire_at', original: 'locker_transaction.expire_at' },
+      { alias: 'card_number', original: 'locker_transaction.card_number' },
     ];
     let genQuery = new QueryBuilderV2(queryLkrTransaction(), body);
     genQuery.exactSearch(searchingParameter);

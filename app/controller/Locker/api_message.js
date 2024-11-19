@@ -12,6 +12,7 @@ exports.get = async function (req, res) {
     let searchingParameter = [
       { alias: 'id', original: 'locker_api_message.id' },
       { alias: 'unique_id', original: 'locker_api_message.unique_id' },
+      { alias: 'message', original: 'locker_api_message.message' },
       { alias: 'sync', original: 'locker_api_message.sync' },
     ];
     let genQuery = new QueryBuilderV2(queryLkrApiMessage(), body);

@@ -29,7 +29,10 @@ const LkrTransaction = Sequel.define(
       { fields: ['locker_name'] },
       { fields: ['phone_number'] },
       { fields: ['pin_number'] },
-      { fields: ['status'] }
+      { fields: ['status'] },
+      { fields: ['start_at'] },
+      { fields: ['expire_at'] },
+      { fields: ['card_number'] }
     ],
   }
 );

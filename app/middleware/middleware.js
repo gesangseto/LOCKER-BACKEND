@@ -27,10 +27,9 @@ async function check_token(req, res) {
     }
     let token = req.headers['token'];
     if (!token) {
-      data.error = true;
-      data.status_code = 401;
-      data.message = `Authentication failed, token header is invalid or has expired`;
-      return response.response(data, res);
+      throw new Error(
+        `Authentication failed, token header is invalid or has expired`
+      );
     }
     if (process.env.DEV_TOKEN == token) {
       req.headers['user_id'] = 0;
