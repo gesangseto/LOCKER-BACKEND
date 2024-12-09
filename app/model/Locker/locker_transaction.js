@@ -6,8 +6,8 @@ let tableName = 'locker_transaction';
 const LkrTransaction = Sequel.define(
   tableName,
   {
-    created_by: { type: DataTypes.BIGINT },
-    updated_by: { type: DataTypes.BIGINT },
+    created_by: { type: DataTypes.STRING },
+    updated_by: { type: DataTypes.STRING },
 
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     gross_amount: { type: DataTypes.FLOAT, allowNull: true },
